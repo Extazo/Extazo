@@ -1011,7 +1011,7 @@ async def roxxop(ctx):
 
 snipe_message_author = {}
 snipe_message_content = {}
-
+ 
 @client.event
 async def on_message_delete(message):
      snipe_message_author[message.channel.id] = message.author
@@ -1019,16 +1019,16 @@ async def on_message_delete(message):
      await sleep(60)
      del snipe_message_author[message.channel.id]
      del snipe_message_content[message.channel.id]
-
+ 
 @client.command()
 async def snipe(ctx):
     channel = ctx.channel 
     try:
-        snipeEmbed = discord.Embed(title=f"Snipe", description = snipe_message_content[channel.id])
-        snipeEmbed.set_footer(text=f"{snipe_message_author[member.avatar_url]}")
+        snipeEmbed = discord.Embed(title=f"Dernier message supprimé #{channel.name}", description = snipe_message_content[channel.id])
+        snipeEmbed.set_footer(text=f"Supprimer par {snipe_message_author[channel.id]}")
         await ctx.send(embed = snipeEmbed)
     except:
-        await ctx.send(f"Aucun message supprimé ici.")
+        await ctx.send(f"Aucun message supprimé ici #{channel.name}")
 
   
 keep_alive.keep_alive()
